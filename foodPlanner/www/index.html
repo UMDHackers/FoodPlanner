@@ -29,6 +29,9 @@
        <ion-side-menu-content>
          <ion-header-bar class="bar-dark">
            <h1 class="title">Food Planner</h1>
+           <button class = "button button-icon" ng-click="new-food.html">
+             <i class="icon ion-compose"></i>
+           </button>
          </ion-header-bar>
          <ion-content>
            <ion-list>
@@ -47,7 +50,29 @@
        </ion-side-menu>
 
      </ion-side-menus>
+     <script id = "new-food.html" type = "text/ng-template">
+      <div class = "modal">
+          <ion-header-bar class="bar-secondary">
+            <h1 class ="title">New Food</h1>
+            <button class = "button button-clear button-positive"
+              ng-click = "closeNewFood()">Cancel</button>
+          </ion-header-bar>
 
+          <ion-content>
+            <form ng-submit = "createFood(food)">
+              <div class = "list">
+                <label class = "item item-input">
+                  <input type = "text" placeholder="What did you eat" ng-model="food.title">
+                </label>
+              </div>
+              <div class = "padding">
+                <button type="submit"
+                  class = "button button-block button-positive">Enter Food</button>
+              </div>
+            </form>
+          </ion-content>
+      </div>
+    </script>
 
   </body>
 </html>

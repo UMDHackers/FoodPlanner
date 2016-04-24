@@ -5,12 +5,28 @@
 // the 2nd parameter is an array of 'requires'
 
 angular.module('foodPlanner', ['ionic'])
-.controller('FoodCtrl', function($scope) {
-  $scope.foods = [
-    { title: 'Pizza' },
-    { title: 'Fries' },
-    { title: 'Ice Cream' }
-  ];
+.controller('FoodCtrl', function($scope, $ionicModal) {
+  $scope.foods = [];
+  $ionicModal.fromTemplateUrl('new-food.html', function(modal) {
+    $scope.foodModal = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up'
+  });
+
+  $scope.createFood = function(food) {
+    $scope.foods.push({
+      title: food.title
+    });
+    $scope.foodModal.hide();
+    food.title = "";
+  };
+  $scope.newFood = function() {
+    $scope.foodModal.show();
+  };
+  $scope.closeNewFood = function() {
+    $scope.foodModal.hide();
+  };
 });
 
 // .run(function($ionicPlatform) {
