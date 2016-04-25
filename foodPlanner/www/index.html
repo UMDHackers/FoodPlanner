@@ -28,12 +28,15 @@
        <!-- Center content -->
        <ion-side-menu-content>
          <ion-header-bar class="bar-dark">
+           <button class = "button button-icon" ng-click="openMenu()">
+             <i class = "icon ion-navicon"></i>
+           </button>
            <h1 class="title">Food Planner</h1>
-           <button class = "button button-icon" ng-click="new-food.html">
+           <button class = "button button-icon" ng-click="newFood()">
              <i class="icon ion-compose"></i>
            </button>
          </ion-header-bar>
-         <ion-content>
+         <ion-content scroll="false">
            <ion-list>
             <ion-item ng-repeat = "food in foods">
               {{food.title}}
@@ -45,17 +48,24 @@
        <!-- Left menu -->
        <ion-side-menu side="left">
          <ion-header-bar class="bar-dark">
-           <h1 class="title">New</h1>
+           <h1 class="title">Menu</h1>
          </ion-header-bar>
+         <ion-content scroll="false">
+           <ion-list>
+            <ion-item ng-repeat="subsection in subsections" ng-click="selectSubsection(subjection, $index)" ng-class="{active: activeSubsection == subjection}">
+              {{subsection.title}}
+            </ion-item>
+           </ion-list>
+         </ion-content>
        </ion-side-menu>
 
      </ion-side-menus>
      <script id = "new-food.html" type = "text/ng-template">
       <div class = "modal">
+
           <ion-header-bar class="bar-secondary">
             <h1 class ="title">New Food</h1>
-            <button class = "button button-clear button-positive"
-              ng-click = "closeNewFood()">Cancel</button>
+            <button class = "button button-clear button-positive" ng-click = "closeNewFood()">Cancel</button>
           </ion-header-bar>
 
           <ion-content>
@@ -66,8 +76,7 @@
                 </label>
               </div>
               <div class = "padding">
-                <button type="submit"
-                  class = "button button-block button-positive">Enter Food</button>
+                <button type="submit" class = "button button-block button-positive">Enter Food</button>
               </div>
             </form>
           </ion-content>

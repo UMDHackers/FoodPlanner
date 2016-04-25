@@ -5,8 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 
 angular.module('foodPlanner', ['ionic'])
+
 .controller('FoodCtrl', function($scope, $ionicModal) {
   $scope.foods = [];
+  $scope.projects = [
+    
+  ];
+
   $ionicModal.fromTemplateUrl('new-food.html', function(modal) {
     $scope.foodModal = modal;
   }, {
