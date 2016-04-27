@@ -28,7 +28,7 @@
        <!-- Center content -->
        <ion-side-menu-content>
          <ion-header-bar class="bar-dark">
-           <button class = "button button-icon" ng-click="openMenu()">
+           <button class = "button button-icon" ng-click="toggleMenu()">
              <i class = "icon ion-navicon"></i>
            </button>
            <h1 class="title">Food Planner</h1>
@@ -40,8 +40,14 @@
            <ion-list>
             <ion-item ng-repeat = "food in foods">
               {{food.title}}
+              <span class = "item-note">
+                {{food.calories}}
+              </span>
             </ion-item>
            </ion-list>
+           <h5 style = "text-align:center;">
+            Total: {{current_sum}}
+          </h5>
          </ion-content>
        </ion-side-menu-content>
 
@@ -53,7 +59,7 @@
          <ion-content scroll="false">
            <ion-list>
             <ion-item ng-repeat="subsection in subsections" ng-click="selectSubsection(subjection, $index)" ng-class="{active: activeSubsection == subjection}">
-              {{subsection.title}}
+              {{subsection}}
             </ion-item>
            </ion-list>
          </ion-content>
@@ -72,7 +78,10 @@
             <form ng-submit = "createFood(food)">
               <div class = "list">
                 <label class = "item item-input">
-                  <input type = "text" placeholder="What did you eat" ng-model="food.title">
+                  <input type = "text" placeholder="What did you eat?" ng-model="food.title">
+                </label>
+                <label class = "item item-input">
+                  <input type = "text" placeholder="How many calories?" ng-model="food.calories">
                 </label>
               </div>
               <div class = "padding">

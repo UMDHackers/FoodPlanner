@@ -3,13 +3,16 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-
+var sum = 0;
 angular.module('foodPlanner', ['ionic'])
 
-.controller('FoodCtrl', function($scope, $ionicModal) {
+.controller('FoodCtrl', function($scope, $ionicModal, $ionicSideMenuDelegate) {
   $scope.foods = [];
-  $scope.projects = [
-    
+  $scope.current_sum = sum;
+  $scope.subsections = [
+    "home",
+    "past results",
+    "credit"
   ];
 
   $ionicModal.fromTemplateUrl('new-food.html', function(modal) {
@@ -21,10 +24,13 @@ angular.module('foodPlanner', ['ionic'])
 
   $scope.createFood = function(food) {
     $scope.foods.push({
-      title: food.title
+      title: food.title,
+      calories: food.calories
     });
+    $scope.current_sum  =  $scope.current_sum  + parseInt(food.calories, 10);
     $scope.foodModal.hide();
     food.title = "";
+    food.calories = "";
   };
   $scope.newFood = function() {
     $scope.foodModal.show();
@@ -32,7 +38,12 @@ angular.module('foodPlanner', ['ionic'])
   $scope.closeNewFood = function() {
     $scope.foodModal.hide();
   };
+  $scope.toggleMenu = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+
 });
+
 
 // .run(function($ionicPlatform) {
 //   $ionicPlatform.ready(function() {
